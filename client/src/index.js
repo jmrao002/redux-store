@@ -5,6 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from "./store";
 
+// Every time the state changes, log it
+// Note that subscribe() returns a function for unregistering the listener
+const unsubscribe = store.subscribe(() =>
+  console.log('State after dispatch: ', store.getState())
+)
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,3 +22,6 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
+
+// Stop listening to state updates
+unsubscribe()
